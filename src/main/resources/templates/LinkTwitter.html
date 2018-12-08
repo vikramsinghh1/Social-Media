@@ -1,0 +1,109 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+      
+    <link rel="stylesheet" href="../../vendors/fontawesome-1/css/all.css"/>
+    <link rel="stylesheet" href="../../vendors/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../vendors/font-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../../vendors/themify-icons/css/themify-icons.css"/>
+    <link rel="stylesheet" href="../../vendors/flag-icon-css/css/flag-icon.min.css"/>
+    <link rel="stylesheet" href="../../vendors/selectFX/css/cs-skin-elastic.css"/>
+    <link rel="stylesheet" href="../../assets/css/style.css"/>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'/>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/plugins.js"></script>
+    <script src="../../assets/js/lib/data-table/datatables.min.js"></script>
+    <script src="../../assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+    <script src="../../assets/js/lib/data-table/datatables-init.js"></script>
+    <script src="../../assets/js/lib/chart-js/Chart.bundle.js"></script>
+    <script src="../../assets/js/lib/chosen/chosen.jquery.min.js"></script>
+    <script src="../../assets/js/dashboard.js"></script>
+    <script src="../../assets/js/widgets.js"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+	<div class="card  fadeInLeft modal-content" style="margin-top:50px;">
+        <div class="card-header" style="background-color:white">
+            <strong>Twitter</strong>Account Form
+        </div>
+        <div class="card-body card-block">
+			
+			<form action="/rest/auth/addTwitterAccount" class="pt-2 pl-5 pr-5 pb-3" method="POST">
+			  
+			  <div class="form-group">
+                  <label class="control-label mb-1">Consumer Key</label>
+				  <input class="form-control" type="text" id="consumerKey" placeholder="enter consumerKey" name="consumerKey" th:value="${twitterAccount?.consumerKey}"/>
+			  </div>
+			  <div class="form-group">
+                  <label for="cc-payment" class="control-label mb-1">Consumer Secret</label>
+			  	  <input class="form-control" type="text" id="consumerSecret" placeholder="enter consumerSecret" name="consumerSecret" th:value="${twitterAccount?.consumerSecret}"/>
+			  </div>
+			  <div class="form-group">
+                  <label for="cc-payment" class="control-label mb-1">Access Token</label>
+			 	  <input class="form-control" type="text" id="accessToken" placeholder="enter accessToken" name="accessToken" th:value="${twitterAccount?.accessToken}"/>
+			  </div>
+			  <div class="form-group">
+                  <label for="cc-payment" class="control-label mb-1">Access Token Secret</label>
+			  	  <input  class="form-control" type="text" id="accessTokenSecret" placeholder="enter accessTokenSecret" name="accessTokenSecret" th:value="${twitterAccount?.accessTokenSecret}"/>
+			  </div>
+			   <div>
+                   <button type="submit" class="btn btn-lg btn-primary btn-block">
+                           Submit
+                  </button>
+               </div>
+			</form> 
+		</div>
+	</div>
+	
+
+<div class="jumbotron mt-10">
+	<blockquote class="blockquote">
+	<h4 class="display-4">Twitter account</h4>
+	  <p class="mb-0"> 
+	
+	  Steps to generate  twitter api keys 
+
+https://developer.twitter.com/en/apply-for-access
+
+Click on the above link and follow all the steps to generate access tokens for twitter account.<br></br>
+At the top right corner click on Apply.<br></br>
+Login with your twitter credentials or Create a twitter of you don’t have one (Use this link to create a  twitter account. https://twitter.com/i/flow/signup)<br></br>
+Click on apply for a developer account.<br></br>
+Fill out any additional details and click on Continue <br></br>
+Select I am requesting access for my own personal use<br></br>
+Account name :Your name<br></br>
+Primary country of operation: United States<br></br>
+Select publish and curate tweets Unser use cases.<br></br>
+For description - please add the following points. <br></br>
+In regards to the first question, we are building a web application as a part of our coursework. We are in grad school, pursuing computer science. The Web application we are building enables a user to make a tweet onto his twitter account, after giving the required permissions. The overall picture of the project is that, the user will be able to make a post/status update onto multiple social media platforms from once place.<br></br>
+We do not intend to analyze Tweets, Twitter users, or their content.<br></br>
+Our use involves tweeting into the user's twitter account.<br></br>
+Our web application displays past tweets that the user has made in his account. This information will be displayed only to the authenticated user, that gives permission to access his twitter account.<br></br>
+Will your product, service, or analysis make Twitter content or derived information available to a government entity? - Answer No<br></br>
+Agree to the terms and conditions <br></br>
+Verify your email.<br></br>
+After the verification is done, give the application a name.<br></br>
+Give description. <br></br>
+Website URL : https://www.google.com<br></br>
+Call Back URL: http://3.16.206.114:5000<br></br>
+Add a description to the application.<br></br>
+Go to keys and tokens.<br></br>
+Click on generate access tokens. <br></br>
+	
+	</p>
+	</blockquote>
+</div>
+
+
+</div>
+
+</body>
+</html>

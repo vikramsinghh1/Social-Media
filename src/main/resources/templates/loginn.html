@@ -1,0 +1,110 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<head>
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+    <title>Social Media Broadcasting</title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+
+    <link rel="shortcut icon" href="favicon.ico"/>
+
+
+    <link rel="stylesheet" href="assets/css/normalize.css"/>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="assets/css/themify-icons.css"/>
+    <link rel="stylesheet" href="assets/css/flag-icon.min.css"/>
+    <link rel="stylesheet" href="assets/css/cs-skin-elastic.css"/>
+    <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
+    <link rel="stylesheet" href="assets/scss/style.css"/>
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'/>
+
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+    <style>
+        :root{
+            --main-bg-color:#1261A0;
+            --link-color: #3498db;
+        }
+    </style>
+
+</head>
+<body style="background-color:White;">
+
+
+    <div class="sufee-login d-flex align-content-center flex-wrap">
+        <div class="container">
+            <div class="login-content">
+                <div class="login-logo" style="padding-top:100px">
+                    <img src="imgs/UBLogo.jpg" alt="Logo" width="500" height="200"/>
+                </div>
+                <div class="login-form">
+                  
+                    <form name="f" action="/loginn" th:action="@{/login}"  method="POST">
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input type="text" id="username" class="form-control" placeholder="Enter Username" name="username"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" id="password" class="form-control" placeholder="Enter Password" name="password"/>
+                        </div>
+                        <div class="checkbox" style="margin-bottom:40px">
+                            <!-- <label>
+                                <input type="checkbox" onclick="showText()"> Show Password
+                            </label> -->
+
+                            <label class="" style="color: #005bbb">
+    
+                                <a href="#"  id="showPwd" onclick="showText()" style="color: var(--link-color); display:block;"> Show Password</a>
+
+                                <a herf="#" id="hidePwd" onclick="hideText()" style="color:var(--link-color); display:none"> Hide Password </a>
+                                
+                            </label>
+                            <label class="pull-right" style="color: #005bbb">
+                            
+                                <a href="#" style="color: var(--link-color)"> Forgotten Password?
+                                
+                                </a>
+                                
+                            </label>
+
+                        </div>
+                        <button type="submit" name="submit" value="Login" class="btn btn-success btn-flat m-b-30 m-t-30" style="background-color: var(--main-bg-color)">Sign in</button>
+                        
+                        
+                       
+                        <div class="register-link m-t-15 text-center">
+                            <p>Don't have account ? <a href="/test/auth/registration" style="color: var(--link-color)"> Sign Up Here</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    		function showText(){
+    			document.getElementById("password").type="text";
+    			document.getElementById("showPwd").style.display="none";
+    			document.getElementById("hidePwd").style.display="block";
+    		}
+
+    		function hideText(){
+    			document.getElementById("showPwd").style.display="block";
+    			document.getElementById("hidePwd").style.display="none";
+    			document.getElementById("password").type="password";
+    		}
+    </script>
+    <script src="assets/js/vendor/jquery-2.1.4.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/plugins.js"></script>
+    <script src="assets/js/main.js"></script>
+
+
+</body>
+</html>

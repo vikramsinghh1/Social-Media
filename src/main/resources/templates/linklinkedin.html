@@ -1,0 +1,90 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+      
+    <link rel="stylesheet" href="../../vendors/fontawesome-1/css/all.css"/>
+    <link rel="stylesheet" href="../../vendors/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../vendors/font-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../../vendors/themify-icons/css/themify-icons.css"/>
+    <link rel="stylesheet" href="../../vendors/flag-icon-css/css/flag-icon.min.css"/>
+    <link rel="stylesheet" href="../../vendors/selectFX/css/cs-skin-elastic.css"/>
+    <link rel="stylesheet" href="../../assets/css/style.css"/>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'/>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/plugins.js"></script>
+    <script src="../../assets/js/lib/data-table/datatables.min.js"></script>
+    <script src="../../assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+    <script src="../../assets/js/lib/data-table/datatables-init.js"></script>
+    <script src="../../assets/js/lib/chart-js/Chart.bundle.js"></script>
+    <script src="../../assets/js/lib/chosen/chosen.jquery.min.js"></script>
+    <script src="../../assets/js/dashboard.js"></script>
+    <script src="../../assets/js/widgets.js"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+	<div class="card  fadeInLeft modal-content" style="margin-top:50px;">
+        <div class="card-header" style="background-color:white">
+            <strong>Linkedin</strong>Account Form
+        </div>
+        <div class="card-body card-block">
+			
+			<form action="/rest/auth/addLinkedinAccount" class="pt-2 pl-5 pr-5 pb-3" method="POST">
+			  
+			  <div class="form-group">
+                  <label for="cc-payment" class="control-label mb-1">Access Token</label>
+			 	  <input class="form-control" type="text" id="accessToken" placeholder="enter accessToken" name="accessToken" th:value="${linkedinAccount?.accessToken}"/>
+			  </div>
+		
+			   <div>
+                   <button type="submit" class="btn btn-lg btn-primary btn-block">
+                           Submit
+                  </button>
+               </div>
+			</form> 
+		</div>
+	</div>
+
+
+
+<div class="jumbotron mt-10">
+	<blockquote class="blockquote">
+	<h4 class="display-4">Linkedin account</h4>
+	  <p class="mb-0"> 
+	
+	    
+    Click on https://www.linkedin.com/developers/login <br></br>
+    Login with your LinkedIn credentials or create  a new account. <br></br>
+    After login in, Fill the form with all details. <br></br>
+    Website URL: https://www.google.com <br></br>
+    Make note of the client and client secret <br></br>
+    Add http://3.16.206.114:5000, https://www.getpostman.com/oauth2/callback to authorized redirect url  <br></br>
+    Copy the following link and paste on a browser. Replace the value of the client id with your client id.<br></br>
+
+
+    You will get a response which looks like below. Copy the Link that came as a response and paste it anywhere to look at it. Now, the URL should look something like below. Please make a not of the value code in the Url <br></br> 
+
+
+    Now, copy and paste the following url in your web browser, replace client_id, client_secret and code with the values you have. <br></br>
+
+
+    You will get a response. Make note of the access_token and enter in the field. <br></br>
+
+
+This is a a one time process and you will be able to post on LinkedIn form our web application any time after that. <br></br>
+	</p>
+	</blockquote>
+</div>
+
+
+</div>
+
+</body>
+</html>

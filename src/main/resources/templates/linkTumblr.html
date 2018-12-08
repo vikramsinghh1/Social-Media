@@ -1,0 +1,97 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+      
+    <link rel="stylesheet" href="../../vendors/fontawesome-1/css/all.css"/>
+    <link rel="stylesheet" href="../../vendors/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../vendors/font-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../../vendors/themify-icons/css/themify-icons.css"/>
+    <link rel="stylesheet" href="../../vendors/flag-icon-css/css/flag-icon.min.css"/>
+    <link rel="stylesheet" href="../../vendors/selectFX/css/cs-skin-elastic.css"/>
+    <link rel="stylesheet" href="../../assets/css/style.css"/>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'/>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/plugins.js"></script>
+    <script src="../../assets/js/lib/data-table/datatables.min.js"></script>
+    <script src="../../assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+    <script src="../../assets/js/lib/data-table/datatables-init.js"></script>
+    <script src="../../assets/js/lib/chart-js/Chart.bundle.js"></script>
+    <script src="../../assets/js/lib/chosen/chosen.jquery.min.js"></script>
+    <script src="../../assets/js/dashboard.js"></script>
+    <script src="../../assets/js/widgets.js"></script>
+
+</head>
+
+<body>
+<div class="container">
+	<div class="card  fadeInLeft modal-content" style="margin-top:50px;">
+        <div class="card-header" style="background-color:white">
+            <strong>Tumblr</strong>Account Form
+        </div>
+        <div class="card-body card-block">
+
+			
+			<form action="/rest/auth/addTumblrAccount" class="pt-2 pl-5 pr-5 pb-3" method="POST">
+			  
+			  <div class="form-group">
+                  <label for="cc-payment" class="control-label mb-1">Consumer Key</label>
+				  <input class="form-control" type="text" id="consumerKey" placeholder="enter consumerKey" name="consumerKey" th:value="${tumblrAccount?.consumerKey}"/>
+			  </div>
+			  <div class="form-group">
+                  <label for="cc-payment" class="control-label mb-1">Consumer Secret</label>
+			  	  <input class="form-control" type="text" id="consumerSecret" placeholder="enter consumerSecret" name="consumerSecret" th:value="${tumblrAccount?.consumerSecret}"/>
+			  </div>
+			  <div class="form-group">
+                  <label for="cc-payment" class="control-label mb-1">Access Token</label>
+			 	  <input class="form-control" type="text" id="accessToken" placeholder="enter accessToken" name="accessToken" th:value="${tumblrAccount?.accessToken}"/>
+			  </div>
+			  <div class="form-group">
+                  <label for="cc-payment" class="control-label mb-1">Access Token Secret</label>
+			  	  <input  class="form-control" type="text" id="accessTokenSecret" placeholder="enter accessTokenSecret" name="accessTokenSecret" th:value="${tumblrAccount?.accessTokenSecret}"/>
+			  </div>
+			   <div>
+                   <button type="submit" class="btn btn-lg btn-primary btn-block">
+                           Submit
+                  </button>
+               </div>
+			</form> 
+		</div>
+	</div>
+<div class="jumbotron mt-10">
+	<blockquote class="blockquote">
+	<h4 >Steps to generate tumblr API keys </h4>
+	  <p class="mb-0"> 
+	
+	    Register with Tumblr : https://www.tumblr.com/register<br></br>
+	    Create an application: https://www.tumblr.com/oauth/register<br></br>
+	    Use the following details to register an application. <br></br>
+	        Application Name: - anything of your choice <br></br>>
+	        Application website: https://www.google.com<br></br>>
+	        Application description: “this application to broadcast into different social media from one application”<br></br>
+	        Default Callback url: http://localhost:5000<br></br>
+	        Application id: anything your choice <br></br>
+	        Click on register <br></br>
+	        Now, click show secret key.<br></br>  
+	        Note down both OAuth consumer key  and secret key.  <br></br>
+	        Got to the link https://api.tumblr.com/console/calls/user/info and provide your consumer key and secret and click on  authenticate. <br></br>
+	        Click on allow access for the application name you entered. <br></br>
+	        Click on show keys at the top right corner and make a note os all the keys.<br></br>
+	        Please enter these api keys in the above form to continue <br></br>
+	
+	
+	This is a one time process and after submitting the apI keys, you will be able to make posts to Tumblr anytime after this.<br></br>
+	
+	</p>
+	</blockquote>
+</div>
+
+
+
+</div>
+</body>
+</html>

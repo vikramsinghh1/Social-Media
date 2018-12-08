@@ -1,0 +1,528 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+      
+    <link rel="stylesheet" href="vendors/fontawesome-1/css/all.css"/>
+    <link rel="stylesheet" href="vendors/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="vendors/themify-icons/css/themify-icons.css"/>
+    <link rel="stylesheet" href="vendors/flag-icon-css/css/flag-icon.min.css"/>
+    <link rel="stylesheet" href="vendors/selectFX/css/cs-skin-elastic.css"/>
+    <link rel="stylesheet" href="vendors/jqvmap/dist/jqvmap.min.css"/>
+    <link rel="stylesheet" href="assets/css/style.css"/>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'/>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/plugins.js"></script>
+    <script src="assets/js/lib/data-table/datatables.min.js"></script>
+    <script src="assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+    <script src="assets/js/lib/data-table/datatables-init.js"></script>
+    <script src="assets/js/lib/chart-js/Chart.bundle.js"></script>
+    <script src="assets/js/lib/chosen/chosen.jquery.min.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+    <script src="assets/js/widgets.js"></script>
+
+</head>
+
+<body>
+
+<!-- <body th:onclick="'javascript:disablePost('twitter', \'' + ${user.twitter_account_id} + '\');'"> -->
+    <div id="main-panel" class="right-panel">
+
+        <!-- Header-->
+        <header id="header" class="header">
+
+            <div class="header-menu">
+
+                <div class="col-sm-7">
+                    <div class="header-left">
+                        
+                    </div>
+                </div>
+
+                <div class="col-sm-5">
+                    <div class="user-area dropdown float-right">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="user-avatar rounded-circle" src="imgs/ano.jpg" alt="User Avatar"/>
+                        </a>
+
+                        <div class="user-menu dropdown-menu">
+<!--                             <a class="nav-link" href="#"><i class="fa fa-user"></i> My Profile</a> -->
+                            <a class="nav-link" onclick="loadDiv('settings')" href="#"><i class="fa fa-cog"></i> Settings</a>
+                            <a class="nav-link" href="/logout"><i class="fa fa-power-off"></i> Logout</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </header>
+        <!--               Header   		 -->
+
+        <div class="breadcrumbs">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h6>Welcome, <span th:text="${user.username}">Some User</span></h6>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li class="active">Dashboard</li>
+                        </ol>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+        	
+        
+       <div class="container">
+       <div class="col-sm-12" id="success" style="display:none">
+       		<div class="alert  alert-success alert-dismissible fade show" role="alert">
+            	<span class="badge badge-pill badge-success">Success</span> <span id ="successMsg"></span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+       </div>
+       
+        <div class="col-sm-12" id="errorTwitter" style="display:none">
+       		<div class="alert  alert-danger alert-dismissible fade show" role="alert">
+            	<span class="badge badge-pill badge-danger">Error</span> Please limit the number of characters to 280 as you have twitter selected.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+       </div>
+       
+       <div class="card  fadeInLeft modal-content" style="min-height:700px; margin-top:50px;">
+        <div class="card-header" style="background-color:white">
+            <strong>App</strong>Home
+        </div>
+        <div class="card-body card-block">
+       
+       	<div id="main" class="content mt-2">
+        	 <form onsubmit="return broadcast()" style="margin-top:50px;">
+        	 <div class="form-group">
+		           <label>To</label>
+		           <input type="email" id="sendTo" class="form-control" aria-label="With textarea" name="sendTo"></input>
+		       </div>
+		      
+        	  <div class="form-group">
+		           <label>Title | Subject</label>
+		           <input type="text" id="title" class="form-control" aria-label="With textarea" name="title"></input>
+		       </div>
+		       <div class="form-group">
+		           <label for="post-select">Post Status</label>
+		           <textarea id="postMessage" class="form-control" aria-label="With textarea" rows="8" name="status"></textarea>
+		       </div>
+	   			
+		   		<div class="form-check form-check-inline">
+				  <input class="form-check-input" type="checkbox" name="tumblrCheck" id="tumblrCheck" ></input>
+				  <label class="form-check-label" for="exampleRadios1">
+				    <span style="font-size: 2rem;" >
+				  		<span style="color: #34526f;" id = "tumblrIcon">
+				 			 <i class="fab fa-tumblr-square"></i>
+						</span>
+					</span>
+				  </label>
+				</div>
+			
+		   <div class="form-check form-check-inline pl-5 ">
+			  <input class="form-check-input" type="checkbox"  name="linkedinCheck" id="linkedinCheck"/>
+			  
+			  <label class="form-check-label" for="exampleRadios1">
+			    <span style="font-size: 2rem;">
+				  <span style="color: #0077B5;" id="linkedinIcon">
+				  	  <i class="fab fa-linkedin-square"></i>
+				  </span>
+				</span>
+			  </label>
+			</div>
+			
+		   <div class="form-check form-check-inline pl-5">
+			  <input class="form-check-input" type="checkbox" name="twitterCheck" id="twitterCheck" ></input>
+			  <label class="form-check-label" for="exampleRadios1">
+			    <span style="font-size: 2rem;">
+				  <span style="color: #38A1F3;" id="twitterIcon">
+				  <i class="fab fa-twitter-square"></i>
+				  </span>
+				</span>
+			  </label>
+			</div>
+			
+			<div class="form-check form-check-inline pl-5 ">
+			  <input class="form-check-input" type="checkbox"  name="mailCheck" id="mailCheck"/>
+			  
+			  <label class="form-check-label" for="exampleRadios1">
+			    <span style="font-size: 2rem;">
+				  <span style="color: #0077B5;" id="mailIcon">
+					  <i class="fas fa-envelope-square"></i>
+				  </span>
+				</span>
+			  </label>
+			</div>
+	      	 <button type="submit" class="btn btn-primary" style="margin-top:20px;float:right;display:float;">Submit</button>
+			<div class="col-sm-12"><h6><a href="#" onclick="loadDiv('settings')">Add/Update Accounts</a></h6></div>
+	   		</form>
+	   		
+	   				   		<label class="mt-5">5 Most Recent Posts</label>
+	   	    <div class="container">
+  <div class="row clearfix">
+   <div class="col-md-12 column">	
+				<table class="table table-bordered table-striped responsive table-sm">
+				  <thead class="thead-dark">
+				    <tr>
+				      <th scope="col">#</th>
+				      <th scope="col">Post</th>
+				      <th scope="col">Twitter</th>
+				      <th scope="col">Linkedin</th>
+				      <th scope="col">Tumblr</th>
+				      <th scope="col">Date</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				  <span  th:each="post:${posts}">
+					
+				    <tr style="background-color:#FFFFFF !important">
+				      <th scope="row"><h6 th:text="${post.post_id}" ></h6></th>
+				      <td><h6  th:text="${post.postContents}"></h6></td>
+				      
+				      <td>
+				    		<div th:if="${post.twitter} == true">				
+				      		 <label class="form-check-label">
+							    <span style="font-size: 1.5rem;">
+								  <span style="color: #0077B5;">
+								  	  <i class="fab fa-twitter"></i>
+								  </span>
+								</span>
+							  </label>
+							</div>
+				      </td>
+				      
+				      <td>
+				      		<div th:if="${post.linkedin} == true">		
+					      	 <label class="form-check-label" for="exampleRadios1">
+							    <span style="font-size: 1.5rem;">
+								  <span style="color: #0077B5;" id="linkedinIcon">
+								  	  <i class="fab fa-linkedin"></i>
+								  </span>
+								</span>
+							  </label>
+							</div>
+				      </td>
+				      
+				      <td>
+				      	<div th:if="${post.tumblr} == true">				      
+				      		 <label class="form-check-label" for="exampleRadios1">
+							    <span style="font-size: 1.5rem;" >
+							  		<span style="color: #34526f;" id = "tumblrIcon">
+							 			 <i class="fab fa-tumblr"></i>
+									</span>
+								</span>
+							  </label>
+					   </div>
+				      </td>
+				      
+				      
+				      <td><h6 th:text="${post.date}"></h6></td>
+				    </tr>
+				  </span> 
+				  </tbody>
+				</table>
+			</div>
+			</div>
+			</div>
+			<div class="mb-5" onclick="loadDiv('data-table')"><a href="#t"> Click here to see the complete list</a></div>		
+        
+        </div> <!-- .content -->
+        
+        <div id = "data-table" style="display:none;">
+        
+        	<div class="mb-5" onclick="loadDiv('main')"><a href="#">Go Back</a></div>		
+        	
+        	<table id="example" class="display table table-striped table-bordered" style="width:100%">
+	        <thead>
+	            <tr>
+	            	<th>#</th>
+	                <th>Post</th>
+	                <th>Twitter</th>
+	                <th>Linkedin</th>
+	                <th>Tumblr</th>
+	                <th>Date</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	        		<tr th:each="post1:${all_posts}">
+	        			<td th:text="${post1.post_id}"></td>
+					    <td th:text="${post1.postContents}"></td>
+					    <td th:text="${post1.twitter}"></td>
+					    <td th:text="${post1.linkedin}"></td>
+					    <td th:text="${post1.tumblr}"></td>
+					    <td th:text="${post1.date}"></td>
+	        		</tr>
+	
+	        </tbody>
+   		 </table>
+   		 
+        </div>
+        
+        <div id="settings" style="display:none">
+      		<div class="mb-5" onclick="loadDiv('main')"><a href="#">Go Back</a></div>	
+        	<div><a href="/rest/auth/addTwitterAccount"> Click here to link your twitter account</a></div>
+			<div><a href="/rest/auth/addTumblrAccount"> Click here to link your tumblr account</a></div>
+			<div><a href="/rest/auth/addLinkedinAccount"> Click here to link your linkedin account</a></div>	
+        </div>
+        
+        <div id="profile" style="display:none">
+        	<p th:text="${user.username}"></p>
+        	<p th:text="${user.email}"></p>
+        	<p th:text="${user.linkedin_account_id}"></p>
+        	
+
+        </div>
+        
+       </div>
+       </div>
+     </div> <!--  container  -->
+       
+	
+    </div><!-- /#right-panel -->
+
+    <!-- Right Panel -->
+
+ 
+</body>
+
+</html>
+<script th:inline="javascript">
+
+      /*<![CDATA[*/
+	    
+         var linkedin = /*[[${user.linkedin_account_id}]]*/;
+         var twitter = /*[[${user.twitter_account_id}]]*/;
+         var tumblr = /*[[${user.tumblr_account_id}]]*/;
+         var mail = /*[[${user.google_account_id}]]*/;
+
+
+       /*]]>*/
+       if(!linkedin){
+    	   document.getElementById("linkedinIcon").style.opacity = 0.5;
+    	   document.getElementById("linkedinCheck").disabled = true;
+       }
+       
+       if(!twitter){
+    	   document.getElementById("twitterIcon").style.opacity = 0.5;
+    	   document.getElementById("twitterCheck").disabled = true;
+       }
+       
+       if(!tumblr){
+    	   document.getElementById("tumblrIcon").style.opacity = 0.5;
+    	   document.getElementById("tumblrCheck").disabled = true;
+       }
+       
+       if(!mail){
+    	   document.getElementById("mailIcon").style.opacity = 0.5;
+    	   document.getElementById("mailCheck").disabled = true;
+       }
+</script> 
+<script>
+
+$(document).ready(function() {
+
+    $('#example').DataTable();
+     // Multiple selection option, requires chosen jquery lib
+    $(".standardSelect").chosen({
+         disable_search_threshold: 15,
+         no_results_text: "Search item not found!",
+         width: "100%"
+     });
+
+
+});
+
+function disablePost(media, value){
+	console.log(media+"  "+value);
+}
+
+function loadDiv(id){
+	   document.getElementById("data-table").style.display="none";
+	   document.getElementById("main").style.display="none";
+	   document.getElementById("settings").style.display="none";
+	   document.getElementById(id).style.display="block";
+}
+
+
+
+function broadcast() {
+	try {
+		var postMessage = document.getElementById("postMessage").value;
+		var title = document.getElementById("title").value;
+		var email_addresses = document.getElementById("sendTo").value;
+		
+		var twitter = document.getElementById("twitterCheck").checked
+		var linkedin = document.getElementById("linkedinCheck").checked
+		var tumblr = document.getElementById("tumblrCheck").checked
+		var mail = document.getElementById("mailCheck").checked
+		console.log("title: "+title+"  mail "+email_addresses);
+		//console.log("checkbox status twitter- "+twitter+" linkedin-"+linkedin+"  tumblr-"+tumblr);
+		data = { "status": postMessage };
+		dataMsg = {"status": postMessage, "title": title, "email_addresses" : email_addresses};
+		console.log("-----  "+JSON.stringify(dataMsg));
+
+		var requestCount =0, responseCount =0;
+		var failure_arr = [], success_arr = [];
+		if(twitter){
+			if(postMessage.length >=280){
+				document.getElementById('errorTwitter').style.display = "block";
+				return false;
+			}
+			requestCount++;
+			url = "http://localhost:8080/rest/auth/twitter";			
+			jQuery.ajax({
+		        type: "POST",
+		        url: url,
+		        data: data,
+		        success: function (msg) {
+		        	responseCount++;
+		        	console.log("twitter received"+msg);
+		        	var json = JSON.parse(msg);
+		        	console.log("test  "+json.status_code);
+		        	if(parseInt(json.status_code/100) != 2){
+		        		failure_arr.push(json);
+	        		}
+		        	else{
+		        		success_arr.push("twitter");
+		        	}
+		        	
+		        	if(responseCount == requestCount){	
+		        		updateDatabaseRequest(success_arr, failure_arr, postMessage)
+		        	}
+		        }
+		    });
+		}
+		if(linkedin){
+			requestCount++;
+			url = "http://localhost:8080/rest/auth/linkedin";			
+			jQuery.ajax({
+		        type: "POST",
+		        url: url,
+		        data: data,
+		        success: function (msg) {
+		        	responseCount++;
+		        	console.log("linkedin received"+msg);
+		        	var json = JSON.parse(msg);
+		        	if(parseInt(json.status_code/100) != 2){
+	        			failure_arr.push(json);
+	        		}
+		        	else{
+		        		success_arr.push("linkedin");
+		        	}
+		        	if(responseCount == requestCount)
+		        		updateDatabaseRequest(success_arr, failure_arr, postMessage)
+		        }
+		    });
+		}
+		
+		if(tumblr){
+			requestCount++;
+			url = "http://localhost:8080/rest/auth/tumblr";			
+			jQuery.ajax({
+		        type: "POST",
+		        url: url,
+		        data: data,
+		        success: function (msg) {
+		        	responseCount++;
+		        	console.log("tumblr received"+msg);
+		        	var json = JSON.parse(msg);
+		        	//console.log("RES  "+json.status_code/100);
+		        	if(parseInt(json.status_code/100) != 2){
+	        			failure_arr.push(json);
+	        		}else{
+	        			success_arr.push("tumblr");
+	        		}
+		        	if(responseCount == requestCount)
+		        		updateDatabaseRequest(success_arr, failure_arr, postMessage)
+		        }
+		    });
+		}
+		if(mail){
+			requestCount++;
+			url = "http://localhost:8080/rest/auth/googlemail";			
+			jQuery.ajax({
+		        type: "POST",
+		        url: url,
+		        data: dataMsg,
+		        success: function (msg) {
+		        	responseCount++;
+		        	console.log("mail received"+msg);
+		        //	var json = JSON.parse(msg);
+		        	var json = {status_code:200}
+		        	//console.log("RES  "+json.status_code/100);
+		        	if(parseInt(json.status_code/100) != 2){
+	        			failure_arr.push(json);
+	        		}else{
+	        			success_arr.push("goolge mail");
+	        		}
+		        	if(responseCount == requestCount)
+		        		updateDatabaseRequest(success_arr, failure_arr, postMessage)
+		        }
+		    });
+		}
+	}
+	catch(err) {
+		console.log(err);
+	    return false;
+	}
+	return false;	
+}
+
+function updateDatabaseRequest(success_arr, failure_arr, postMessage){
+	if(failure_arr.length != 0){
+		var failureAlert = "";
+		for (i in failure_arr){
+			console.log(failure_arr[i]);
+			$error_description = failure_arr[i].description;
+			if(failure_arr[i].status_code == "400" || failure_arr[i].status_code=="403" || failure_arr[i].status_code=="401" )
+				$error_description = "Please try after sometime, you have exceeded the post limit.";
+			/* if(failure_arr[i].status_code == "401")
+				$error_description = "You have entered invalid credentials. Please correct it";
+			 */
+			failureAlert+= failure_arr[i].social_media+" Post Failed!  Description: "+$error_description+ "(status code: "+failure_arr[i].status_code+")\n";
+		}
+		alert(failureAlert);
+	}
+	
+	jQuery.ajax({
+        type: "POST",
+        url: "http://localhost:8080/rest/auth/updatePostData",
+        data: { status : postMessage,
+        	social_media : success_arr
+        },
+       
+    });
+	if(success.length != 0){
+		var successMsg = "";
+		for (i in success_arr){
+			//console.log(failure_arr[i]);
+			successMsg+= "<b>"+success_arr[i]+"</b> "; 
+		}
+		successMsg+=" posted successfully";
+		console.log(successMsg);
+		document.getElementById("success").style.display = "block";
+		document.getElementById("successMsg").innerHTML=successMsg;
+	}
+}
+	
+	
+	
+</script>
+
+
